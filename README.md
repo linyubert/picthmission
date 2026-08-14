@@ -1,52 +1,58 @@
-# 走音偵探：找出怪怪音
+# Pitch Detective
 
-音樂教室裡出現了一個不太對勁的聲音！  
-和奏太或小音組成偵探搭檔，用耳朵追蹤旋律線索，找出偷偷升高或降低的音符。
+An ear-training game about hearing a single note go wrong. Students listen to a melody, hear it again with one note bent sharp or flat, then circle the culprit on a real staff and say which way it moved.
 
-這是一款以音高聽辨為核心的音樂教育遊戲，適合學生自主練習，也適合教師帶領全班一起挑戰。
+Pitch Detective is part of **Dato Music Lab** (https://datomusiclab.dpdns.org), a working elementary music teacher's studio in Taipei.
 
-## 遊戲特色
+## What it is
 
-- 先聽正確旋律，再比較藏有走音的版本
-- 在真正的五線譜上圈選可疑音符
-- 判斷聲音是升高 `♯` 還是降低 `♭`
-- 每一輪共 6 題，第一題固定為〈小星星〉，後續題目隨機且不重複
-- 每題有兩次作答機會，答錯時會獲得提示並再次聆聽
-- 完成後會產生偵查報告，整理答對率與需要加強的部分
-- 答對 5 題或 6 題，可以獲得一次案件牌卡抽取機會
+Pitch discrimination is usually drilled as isolated intervals — two tones, higher or lower, next. That trains a narrow skill and bores children within a minute.
 
-## 如何遊玩
+This game hides the same skill inside a case file. Something in the music room sounds wrong, and the player has to find it. Because the altered note sits inside a melody the student has just heard clean, the comparison is musical rather than abstract: they are not judging two beeps, they are noticing that a tune they know has been tampered with.
 
-1. 按下「開始偵查」。
-2. 選擇奏太或小音成為你的偵探搭檔。
-3. 先聽第一段正確旋律，記住每個音的位置。
-4. 再聽一次變化旋律，找出哪個音聽起來怪怪的。
-5. 點選譜面上的音符，判斷它是升高 `♯` 或降低 `♭`。
-6. 完成 6 個案件後，查看本次偵查成果。
+## Features
 
-## 案件牌卡
+**Hear it right, then hear it wrong.** Every case plays the correct melody first, so the student builds a reference before the altered version arrives.
 
-完成整輪遊戲並答對至少 5 題，就能解鎖一個神秘卡包。
+**Answer on a real staff.** Suspects are circled on actual notation, not on buttons, so reading and listening train together.
 
-按住卡包由左向右滑到邊緣，即可揭曉本次獲得的角色情境卡。牌卡分為：
+**Sharp or flat.** Finding the note is only half the answer; the student also decides which direction it moved.
 
-- `R`：基礎偵查卡
-- `SR`：進階線索卡
-- `SSR`：珍貴案件卡
-- `SSSR`：唯一的雙人勝利紀念卡
+**Six cases per round.** The first is always *Twinkle, Twinkle, Little Star* as a warm-up; the rest are drawn at random without repeats.
 
-## 偵查小技巧
+**Two attempts, with a hint.** A wrong first answer earns a clue and another listen instead of a red cross.
 
-- 第一次先專心記住旋律輪廓，不必急著看譜。
-- 第二次聆聽時，注意某個音是否突然變得比較尖或比較低沉。
-- 找到位置後，再確認它應該使用升記號還是降記號。
-- 戴上耳機或在安靜的環境遊玩，會更容易聽見細微差異。
+**A closing report.** Each round ends with an accuracy breakdown and a note on what needs more work.
 
-## 推薦給
+**Collectible case cards.** Five or six correct answers unlock a card pack, dragged open from left to right, graded R, SR, SSR and a single SSSR two-detective card.
 
-- 正在學習五線譜與臨時記號的學生
-- 想練習音高辨識與旋律記憶的玩家
-- 尋找音樂課互動活動的教師
-- 想和孩子一起進行聽力挑戰的家長
+## How to use
 
-準備好了嗎？戴上你的偵探徽章，找出藏在旋律裡的怪怪音吧！
+Download the folder and open `index.html` in any browser. Nothing to install, no server, and no network access required.
+
+The game suits both solo practice and whole-class play — with a projector, the class argues about which note sounded wrong before anyone is allowed to circle it.
+
+## Tips for players
+
+Listen to the shape of the melody the first time; don't rush to read the staff. On the second pass, notice which note suddenly sounds brighter or heavier than you remember. Headphones or a quiet room make the difference easier to hear.
+
+## Tech
+
+Vanilla HTML, CSS and JavaScript with the Web Audio API. No framework and no build step.
+
+```
+index.html      Page shell
+app.js          Game logic, audio synthesis, staff rendering
+styles.css      Styling
+assets/         Character art, card images, background music
+```
+
+## License
+
+Code is MIT — see [LICENSE](LICENSE).
+
+Artwork and audio are original work by Yucheng Lin and are **not** covered by the MIT licence; see [NOTICE.md](NOTICE.md) for their terms.
+
+## More from Dato Music Lab
+
+If your students can now hear a note bend, the next step is hearing *what* is playing it — there is a whole-class instrument timbre game built around a lake goddess who asks the questions. Elsewhere in the studio: a sight-reading tug-of-war for two teams on one touchscreen, and a Morse code telegraph that trains long-versus-short listening under the cover of a spy mission. All of them, with field notes on why each was built, are at **https://datomusiclab.dpdns.org**.
