@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#f3ead9" />
+    <title>走音偵探</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="sunbeam" aria-hidden="true"></div>
+    <main id="app" class="app-shell">
+      <header class="topbar">
+        <button id="homeBtn" class="brand" type="button" aria-label="回到首頁">
+          <span class="brand-mark">♫</span>
+          <span><b>走音偵探</b><small>Pitch Detective</small></span>
+        </button>
+        <div id="caseProgress" class="case-progress hidden" aria-label="關卡進度"></div>
+        <button id="soundBtn" class="icon-button" type="button" aria-label="切換聲音">♪</button>
+      </header>
+
+      <section id="screenStart" class="screen start-screen active" aria-labelledby="startTitle">
+        <audio id="homeBgm" src="assets/media/asset-001.mp3" preload="auto" loop autoplay playsinline></audio>
+        <button id="homeBgmBtn" class="home-bgm-button" type="button" aria-label="測試首頁背景音樂" aria-pressed="true">
+          <span aria-hidden="true">♪</span><b>測試聲音</b><small>背景音樂：開</small>
+        </button>
+        <div class="start-shade" aria-hidden="true"></div>
+        <div class="hero-copy">
+          <p class="hero-kicker"><span>♫</span> PITCH DETECTIVE</p>
+          <h1 id="startTitle"><span>走音偵探</span><em>找出怪怪音</em></h1>
+          <p class="lead">音樂教室裡，有一個音不太對勁。<br />戴上偵探徽章，用耳朵找出藏在旋律裡的線索！</p>
+          <button id="beginBtn" class="primary-button hero-start-button" type="button">
+            <span class="button-icon">▶</span>
+            <span><b>開始偵查</b><small>點一下開啟聲音並選擇搭檔</small></span>
+          </button>
+        </div>
+      </section>
+
+      <section id="screenCharacter" class="screen character-screen" aria-labelledby="characterTitle">
+        <div class="section-heading">
+          <p class="eyebrow"><span></span> CASE FILE 01</p>
+          <h2 id="characterTitle">選擇你的偵探搭檔</h2>
+          <p>每位偵探都擁有一雙敏銳的耳朵。你想和誰一起出任務？</p>
+        </div>
+        <div class="character-grid">
+          <button class="character-card" type="button" data-character="奏太" aria-label="選擇奏太">
+            <div class="character-art"><img src="assets/detective-boy.png" alt="音感偵探奏太，在音樂教室拿著調音叉" /></div>
+            <div class="character-info">
+              <span class="character-tag">節拍觀察員</span>
+              <h3>奏太 <small>SOTA</small></h3>
+              <p>「再小的走音，也躲不過我的耳朵！」</p>
+              <span class="choose-label">選擇奏太 <b>→</b></span>
+            </div>
+          </button>
+          <button class="character-card" type="button" data-character="小音" aria-label="選擇小音">
+            <div class="character-art"><img src="assets/detective-girl.png" alt="音感偵探小音，在音樂教室拿著指揮棒" /></div>
+            <div class="character-info">
+              <span class="character-tag">旋律分析員</span>
+              <h3>小音 <small>KOTO</small></h3>
+              <p>「旋律留下的線索，我全都聽見了！」</p>
+              <span class="choose-label">選擇小音 <b>→</b></span>
+            </div>
+          </button>
+        </div>
+      </section>
+
+      <section id="screenGame" class="screen game-screen" aria-live="polite">
+        <div class="game-heading">
+          <div>
+            <p id="phaseEyebrow" class="eyebrow"><span></span> 第一階段 · 記住旋律</p>
+            <h2 id="phaseTitle">先用耳朵聽一次</h2>
+            <p id="phaseHint">譜面被藏起來了。跟著光柱，記住每個音的位置。</p>
+          </div>
+          <div class="game-heading-controls">
+            <div class="level-chip"><small>本次進度</small><b id="sessionCounter">第 1 / 6 題</b></div>
+            <button id="endGameBtn" class="end-game-button" type="button">結束遊戲</button>
+          </div>
+        </div>
+
+        <div class="score-card">
+          <div id="staffWrap" class="staff-wrap">
+            <img id="scoreImage" class="score-image hidden" alt="教師提供的小星星譜面" />
+            <svg id="staff" viewBox="0 0 1040 290" role="img" aria-label="互動式五線譜"></svg>
+            <div id="noteNumbers" class="note-numbers hidden" aria-hidden="true"></div>
+            <div id="scoreMask" class="score-mask">
+              <div><span>♪</span><b>秘密譜面</b><small>先聽，不要偷看喔</small></div>
+            </div>
+            <div id="playhead" class="playhead"></div>
+          </div>
+        </div>
+
+        <div id="answerTools" class="answer-tools hidden">
+          <p>先圈一格，再選擇聲音變化</p>
+          <div class="accidental-tools" role="group" aria-label="選擇臨時記號">
+            <button type="button" data-accidental="sharp"><b>♯</b><span>變高了</span></button>
+            <button type="button" data-accidental="flat"><b>♭</b><span>變低了</span></button>
+          </div>
+        </div>
+
+        <div id="feedback" class="feedback hidden"></div>
+        <div class="game-actions">
+          <button id="replayBtn" class="secondary-button" type="button"><span>↻</span> 再聽一次 <small id="replayCount">2</small></button>
+          <button id="noDiffBtn" class="secondary-button hidden" type="button">兩段沒有不同</button>
+          <button id="nextPhaseBtn" class="primary-button" type="button">聽下一段 <span>→</span></button>
+          <button id="submitBtn" class="primary-button hidden" type="button" disabled>確定答案 <span>✓</span></button>
+        </div>
+      </section>
+
+      <section id="screenResult" class="screen result-screen">
+        <div class="result-card">
+          <div id="resultPortrait" class="result-portrait"></div>
+          <div class="result-copy">
+            <p class="eyebrow"><span></span> CASE CLOSED!</p>
+            <h2>抓到走音了！</h2>
+            <p id="resultText">第 5 格的 Re 偷偷升高了半音。你不只找到了位置，也替旋律寫下了正確線索。</p>
+            <div class="ab-compare">
+              <div><small>A · 原音</small><b id="originalLabel">Re</b><button id="playOriginalBtn" type="button">▶ 聽原音</button></div>
+              <span>→</span>
+              <div><small>B · 變化音</small><b id="changedLabel">Re ♯</b><button id="playChangedBtn" type="button">▶ 聽變化</button></div>
+            </div>
+            <div class="result-actions">
+              <button id="endFromResultBtn" class="secondary-button" type="button">結束遊戲</button>
+              <button id="playAgainBtn" class="primary-button" type="button">下一個案件 <span>→</span></button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="screenSummary" class="screen summary-screen" aria-labelledby="summaryTitle">
+        <div class="summary-card">
+          <div class="summary-heading">
+            <p class="eyebrow"><span></span> DETECTIVE REPORT</p>
+            <h2 id="summaryTitle">本次偵查報告</h2>
+            <p id="summaryMessage">做得很好！你的耳朵已經找到不少旋律線索。</p>
+          </div>
+          <div class="summary-content">
+            <div id="accuracyRing" class="accuracy-ring">
+              <div><b id="accuracyValue">0%</b><span>首次答對率</span></div>
+            </div>
+            <div class="summary-stats">
+              <div><small>已進行／失敗</small><b id="completedValue">0 / 6・0 題</b></div>
+              <div><small>首次答對</small><b id="firstTryValue">0 題</b></div>
+              <div><small>總作答次數</small><b id="attemptsValue">0 次</b></div>
+              <div><small>位置修正</small><b id="positionMistakesValue">0 次</b></div>
+              <div><small>記號修正</small><b id="accidentalMistakesValue">0 次</b></div>
+              <div><small>偵探搭檔</small><b id="partnerValue">奏太</b></div>
+            </div>
+          </div>
+          <div id="cardReward" class="card-reward locked">
+            <div class="card-reward-icon" aria-hidden="true">✦</div>
+            <div class="card-reward-copy">
+              <small>DETECTIVE CARD REWARD</small>
+              <b id="cardRewardTitle">完成 6 題並答對至少 5 題，即可抽卡</b>
+              <span id="cardRewardHint">R 52% ・ SR 30% ・ SSR 15% ・ SSSR 3%</span>
+            </div>
+            <button id="drawCardBtn" class="draw-card-button" type="button" disabled>尚未解鎖</button>
+          </div>
+          <div class="summary-actions">
+            <button id="summaryHomeBtn" class="secondary-button" type="button">回到首頁</button>
+            <button id="restartSessionBtn" class="primary-button" type="button">再偵查 6 題 <span>→</span></button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div id="cardDrawOverlay" class="card-draw-overlay" role="dialog" aria-modal="true" aria-labelledby="cardDrawTitle" aria-hidden="true">
+      <audio id="cardBgm" src="assets/bgm2.mp3" preload="auto" loop playsinline></audio>
+      <div class="card-draw-stage">
+        <button id="closeCardDrawBtn" class="card-draw-close" type="button" aria-label="關閉抽卡結果">×</button>
+        <div class="card-draw-heading">
+          <p>DETECTIVE BLIND PACK</p>
+          <h2 id="cardDrawTitle">案件牌卡</h2>
+        </div>
+        <div id="blindPack" class="blind-pack" role="button" tabindex="0" aria-label="按住卡包由左向右滑動以打開">
+          <div class="pack-top"></div>
+          <div class="pack-bottom"></div>
+          <div class="pack-face">
+            <span>♫</span>
+            <b>PITCH<br />DETECTIVE</b>
+            <small>BLIND CASE PACK</small>
+          </div>
+          <i class="swipe-cut" aria-hidden="true"></i>
+          <i class="pack-flare"></i>
+        </div>
+        <div id="swipeGuide" class="swipe-guide" aria-hidden="true">
+          <span>☝</span><b>按住卡包向右滑開</b><i>→</i>
+        </div>
+        <article id="revealedCard" class="revealed-card" aria-live="polite">
+          <div class="revealed-card-visual">
+            <img id="rewardCardImage" src="" alt="" />
+            <div id="rewardCardBadge" class="card-rarity-badge">
+              <b id="rewardCardRarity">R</b>
+              <span id="rewardCardBonus">+1</span>
+            </div>
+          </div>
+          <div class="revealed-card-copy">
+            <small id="rewardCardOwner">奏太 CASE CARD</small>
+            <h3 id="rewardCardName">音叉追蹤</h3>
+            <p id="rewardCardStory">用正確的基準音，找出藏在旋律裡的偏差。</p>
+          </div>
+        </article>
+        <p id="cardDrawStatus" class="card-draw-status">盲包正在回應你的偵查成果……</p>
+      </div>
+    </div>
+    <script src="app.js"></script>
+  </body>
+</html>
